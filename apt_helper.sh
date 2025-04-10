@@ -1,5 +1,12 @@
 #!/bin/bash
 
+check_lock() {
+    if lsof /var/lib/dpkg/lock-frontend > /dev/null || lsof /var/lib/apt/lists/lock > /dev/null; then
+        echo "Another instance of dpkg or apt is holding the lock. Wait until it's done before running this script."
+        exit 1
+    fi
+}
+
 search_package() {
     local package_name=$1
 
@@ -31,5 +38,7 @@ if [ -z "$1" ]; then
     echo "Usage: $0 <package-name>"
     exit 1
 fi
+
+check_lock
 
 search_package "$1"
