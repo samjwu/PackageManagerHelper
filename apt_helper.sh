@@ -3,6 +3,9 @@
 check_lock() {
     if lsof /var/lib/dpkg/lock-frontend > /dev/null || lsof /var/lib/apt/lists/lock > /dev/null; then
         echo "Another instance of dpkg or apt is holding the lock. Wait until it's done before running this script."
+        echo "To see which process is holding the lock, run the following:"
+        echo "    lsof /var/lib/dpkg/lock-frontend"
+        echo "    lsof /var/lib/apt/lists/lock"
         exit 1
     fi
 }
