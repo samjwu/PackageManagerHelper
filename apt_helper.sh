@@ -15,8 +15,8 @@ search_package() {
     read -p "Install $package_name? (y/n): " answer
 
     if [[ "$answer" == "y" || "$answer" == "Y" ]]; then
-        apt update
-        apt install -y "$package_name"
+        apt-get update
+        apt-get install -y "$package_name"
         if [ $? -eq 0 ]; then
             echo "$package_name installed successfully"
         else
