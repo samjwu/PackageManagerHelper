@@ -5,6 +5,11 @@ search_package() {
 
     package_info=$(apt search "$package_name" | grep -A 3 "^$package_name")
 
+    if [[ -z "$package_info" ]]; then
+        echo "Package $package_name not found."
+        exit 1
+    fi
+
     echo "$package_info"
 }
 
