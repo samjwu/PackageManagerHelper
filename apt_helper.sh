@@ -11,6 +11,8 @@ search_package() {
     fi
 
     echo "$package_info"
+
+    read -p "Install $package_name? (y/n): " answer
 }
 
 if [ -z "$1" ]; then
